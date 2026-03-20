@@ -282,36 +282,34 @@ Función principal
 
 function verificar(){
 
-drawAxes();
+    drawAxes();
 
-let x1 = parseFloat(document.getElementById("x1").value);
-let y1 = parseFloat(document.getElementById("y1").value);
+    const puntos = getPoints();
 
-let x2 = parseFloat(document.getElementById("x2").value);
-let y2 = parseFloat(document.getElementById("y2").value);
+    if(!puntos){
+        document.getElementById("resultado").innerText =
+        "Ingresa valores válidos";
+        return;
+    }
 
-let x3 = parseFloat(document.getElementById("x3").value);
-let y3 = parseFloat(document.getElementById("y3").value);
+    const [p1,p2,p3] = puntos;
+    const method = document.getElementById("method").value;
 
-let method = document.getElementById("method").value;
+    if(esTriangulo(p1,p2,p3)){
 
-if(esTriangulo(x1,y1,x2,y2,x3,y3)){
+        document.getElementById("resultado").innerText =
+        "Sí es triángulo";
 
-document.getElementById("resultado").innerText =
-"Sí se forma un triángulo";
+        drawLine(p1,p2,3,method);
+        drawLine(p2,p3,3,method);
+        drawLine(p3,p1,3,method);
 
-drawLine(x1,height-y1,x2,height-y2,3,method);
-drawLine(x2,height-y2,x3,height-y3,3,method);
-drawLine(x3,height-y3,x1,height-y1,3,method);
+    } else {
 
-}
-else{
+        document.getElementById("resultado").innerText =
+        "No es triángulo";
 
-document.getElementById("resultado").innerText =
-"No se forma un triángulo";
-
-}
-
+    }
 }
 
 drawAxes();

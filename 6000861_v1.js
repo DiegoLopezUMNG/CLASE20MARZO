@@ -229,39 +229,38 @@ Función principal
 2 Verifica si hay triángulo
 3 Dibuja puntos y líneas
 --------------------------------------------------*/
+
 function verificar(){
 
+    drawAxes();
+
+    const puntos = getPoints();
+
+    if(!puntos){
+        document.getElementById("resultado").innerText =
+        "Ingresa valores válidos";
+        return;
+    }
+
+    const [p1,p2,p3] = puntos;
+    const method = document.getElementById("method").value;
+
+    if(esTriangulo(p1,p2,p3)){
+
+        document.getElementById("resultado").innerText =
+        "Sí es triángulo";
+
+        drawLine(p1,p2,3,method);
+        drawLine(p2,p3,3,method);
+        drawLine(p3,p1,3,method);
+
+    } else {
+
+        document.getElementById("resultado").innerText =
+        "No es triángulo";
+
+    }
+}
+
 drawAxes();
 
-let x1 = parseFloat(document.getElementById("x1").value);
-let y1 = parseFloat(document.getElementById("y1").value);
-
-let x2 = parseFloat(document.getElementById("x2").value);
-let y2 = parseFloat(document.getElementById("y2").value);
-
-let x3 = parseFloat(document.getElementById("x3").value);
-let y3 = parseFloat(document.getElementById("y3").value);
-
-let method = document.getElementById("method").value;
-
-if(esTriangulo(x1,y1,x2,y2,x3,y3)){
-
-document.getElementById("resultado").innerText =
-"Sí se forma un triángulo";
-
-drawLine(x1,height-y1,x2,height-y2,3,method);
-drawLine(x2,height-y2,x3,height-y3,3,method);
-drawLine(x3,height-y3,x1,height-y1,3,method);
-
-}
-else{
-
-document.getElementById("resultado").innerText =
-"No se forma un triángulo";
-
-}
-
-}
-
-
-drawAxes();
