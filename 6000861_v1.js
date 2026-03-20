@@ -34,6 +34,29 @@ function canvasToCartesiana(p1, height){
 return [p1.x , height - p1.y];
 
 }
+/*--------------------------------------------------
+ Funcion que obtiene y valida los puntos desde inputs
+
+Retorna:
+- Array de puntos si todo está bien
+- null si hay error
+--------------------------------------------------*/
+
+function getPoints(){
+
+    const ids = ["x1","y1","x2","y2","x3","y3"];
+    const values = ids.map(id => parseFloat(document.getElementById(id).value));
+
+    if(values.some(v => isNaN(v))){
+        return null;
+    }
+
+    return [
+        {x: values[0], y: values[1]},
+        {x: values[2], y: values[3]},
+        {x: values[4], y: values[5]}
+    ];
+}
 
 /*--------------------------------------------------
 drawLine
@@ -239,5 +262,6 @@ document.getElementById("resultado").innerText =
 }
 
 }
+
 
 drawAxes();
